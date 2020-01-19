@@ -1,0 +1,316 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Dashboard {% endblock %}
+{% block specific_css %}
+  <link href="{% static 'css/admin.css' %}" rel="stylesheet">
+  <link  href="{% static 'css/datepicker.css' %}" rel="stylesheet">
+{% endblock %}
+{% block main %}
+  <style type="text/css">
+    .schedule {
+      text-align: center;
+      display: block;
+      border-radius: 20px;
+      border: 2px solid #b0c4de;
+      background-color: rgba(179,196,222,0.5);
+    }
+    .schedule li{
+      font-size: 12px;
+      font-weight:500;
+      margin: 5px;
+      padding: 0px;
+    }
+    .schedule strong{
+      font-weight:1000;
+    }
+    @keyframes pop-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        transform: scale(1.2);
+      }
+    }
+    table{
+      margin:10px auto;
+    }
+    .tableizer-firstrow  {
+      font-weight: 400;
+      color: #5f6c7a;
+      padding: 10px;
+      background: rgba(0,128,127,0.2);
+    }
+    .tableizer-firstrow  thead{
+      font-size: 20px;
+      font-weight: 600;
+      color: #5f6c7a;
+      padding: 10px;
+      background: rgba(0,128,127,0.2);
+    }
+    .tableizer-firstrow  tr th{
+      font-size: 24px;
+      font-weight: 600;
+      color: #5f6c7a;
+      padding: 10px;
+      background: rgba(0,128,127,0.2);
+    }
+    .container-fluid.inner  table  tbody  tr  td{
+      border: 4px solid #fff;
+      width: 170px;
+      padding: 10px;
+      background: #f8f8f8;
+    }
+    .section-header{
+      color:#5f6c7a;
+      font-size: 28px;
+      font-weight: 800;
+      text-align: center;
+    }
+    .col-6 .search-bar i input{
+      color:#5f6c7a;
+      margin: 10px auto;
+      font-size: 18px;
+      font-size: 600px;
+      width: 80%; 
+      margin: auto; 
+      padding: 10px;
+    }
+    h3 strong{
+      color:#ededed;
+      font-weight: 1000;
+    }
+
+  </style>
+  <div class = "bg_color_3">
+    <div class = "box_background">
+      <div class="main_title_2" style="padding-top:20px;"><h3><strong>Dashboard</strong></h3></div>
+      <div class = "box_general_2">
+        <form method="get">
+          {% csrf_token %}
+          <div class="container-fluid inner">
+            <div class="section-header">Notifications</div>
+            <div class="card dashboard text-white o-hidden h-100" style="background-color: #F08080; width:20%;">
+              <div class="card-body">
+                  <div class="card-body-icon">
+                      <i class="fa fa-fw fa-calendar-check-o"></i>
+                  </div>
+                  <div class="mr-5"><h5>{{ pending_count }} Pending requests</h5></div>
+              </div>
+              <a class="card-footer text-white clearfix small z-1" href="/requestlist/">
+                <span class="float-left">View Details</span>
+                <span class="float-right">
+                      <i class="fa fa-angle-right"></i>
+                </span>
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="box_general_2">
+        <div class="container-fluid inner">
+          <div class="section-header">Weekly Schedule</div>
+          <div class="col-6 search-bar">
+              <i class="icon-calendar"></i><input data-toggle="datepicker" id="input_date">
+              <input type="submit" value="Search" class="btn_1 small" id = "search_date"/>
+          </div>
+          <table class="tableizer-firstrow">
+            <thead>
+              <tr class="tableizer-firstrow">
+                <th>Sunday</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="date_sun"></td>
+                <td id="date_mon"></td>
+                <td id="date_tue"></td>
+                <td id="date_wed"></td>
+                <td id="date_thu"></td>
+                <td id="date_fri"></td>
+                <td id="date_sat"></td>
+              </tr>
+              <tr>
+                <td id="Sunday"></td>
+                <td id="Monday"></td>
+                <td id="Tuesday"></td>
+                <td id="Wednesday"></td>
+                <td id="Thursday"></td>
+                <td id="Friday"></td>
+                <td id="Saturday"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block specific_js %}
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/jquery.easing.min.js"></script>
+	<script src="/static/js/retina-replace.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+  <script src="{% static 'js/datepicker.js' %}"></script>
+  <script src="/static/js/admin.js"></script>
+  <script type="text/javascript">
+    $('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd'});
+  </script>
+  <script type="text/javascript">
+    function get_schedule(date){
+      $.ajaxSetup({data:{csrfmiddlewaretoken:'{{ csrf_token }}'}});
+      $.ajax({
+        type:"POST",
+        url: '/GetSchedule/',
+        data:{"date": date},
+        success: function(result){
+          render(result);
+        }
+      });
+    }
+    function render(result){
+      for (var i = 0; i < result['dates_of_week'].length; i++){
+        var date = result['dates_of_week'][i];
+          if (i == 0){
+            $("#date_mon").html(date);
+            var content_mon='';
+            if (result["schedule_dict"][date].length != 0){
+              for (var j = 0; j< result["schedule_dict"][date].length; j++){
+                var obj_1 = {};
+                obj_1 = result["schedule_dict"][date][j];
+                content_mon+='<ol class="schedule pop-in">';
+                content_mon+='<li><strong> Time:</strong>'+'</li><li>'+ obj_1["Time"] +'</li>';
+                content_mon+='<li><strong> Patient</strong>:'+'</li><li>'+ obj_1["First_name"] + '</li><li>'+ obj_1["Last_name"]+'</li>';
+                content_mon+='</ol>';
+              }}else{
+                content_mon+='';
+              }
+          }
+          else if (i == 1){
+            $("#date_tue").html(date);
+            var content_tue='';
+            if (result["schedule_dict"][date].length != 0){
+              for (var j = 0; j< result["schedule_dict"][date].length; j++){
+                var obj_2 = {};
+                obj_2 = result["schedule_dict"][date][j];
+                content_tue+='<ol class="schedule pop-in">';
+                content_tue+='<li><strong> Time:</strong>'+'</li><li>'+ obj_2["Time"] +'</li>';
+                content_tue+='<li><strong> Patient</strong>:'+'</li><li>'+ obj_2["First_name"] + '</li><li>'+ obj_2["Last_name"]+'</li>';
+                content_tue+='</ol>';
+              } }
+              else{
+                content_tue+='';
+              }
+          }
+          else if (i == 2){
+            $("#date_wed").html(date);
+            var content_wed='';
+            if (result["schedule_dict"][date].length != 0){
+              for (var j = 0; j< result["schedule_dict"][date].length; j++){
+                var obj_3 = {};
+                obj_3 = result["schedule_dict"][date][j];                
+                content_wed+='<ol class="schedule pop-in">';
+                content_wed+='<li><strong> Time:</strong>'+'</li><li>'+ result["schedule_dict"][date][j]["Time"] +'</li>';
+                content_wed+='<li><strong> Patient</strong>:'+'</li><li>'+ obj_3["First_name"] + '</li><li>'+ obj_3["Last_name"]+'</li>';
+                content_wed+='</ol>';
+              }}else{
+                content_wed+='';
+              }
+          }
+          else if (i == 3){
+            $("#date_thu").html(date);
+            var content_thu='';
+            if (result["schedule_dict"][date].length != 0){
+              for (var j = 0; j< result["schedule_dict"][date].length; j++){
+                var obj_4 = {};
+                obj_4 = result["schedule_dict"][date][j];
+                content_thu+='<ol class="schedule pop-in">';
+                content_thu+='<li><strong> Time:</strong>'+'</li><li>'+ obj_4["Time"] +'</li>';
+                content_thu+='<li><strong> Patient</strong>:'+'</li><li>'+ obj_4["First_name"] + '</li><li>'+ obj_4["Last_name"]+'</li>';
+                content_thu+='</ol>';
+              } }else{
+                content_thu+='';
+              }
+          }
+          else if (i == 4){
+            $("#date_fri").html(date);
+            var content_fri='';
+            if (result["schedule_dict"][date].length != 0){
+              for (var j = 0; j< result["schedule_dict"][date].length; j++){
+                var obj_5 = {};
+                obj_5 = result["schedule_dict"][date][j];                
+                content_fri+='<ol class="schedule pop-in">';
+                content_fri+='<li><strong> Time:</strong>'+'</li><li>'+ obj_5["Time"] +'</li>';
+                content_fri+='<li><strong> Patient</strong>:'+'</li><li>'+ obj_5["First_name"] + '</li><li>'+ obj_5["Last_name"]+'</li>';
+                content_fri+='</ol>';
+              } }else{
+                content_fri+='';
+              }
+          }
+          else if (i == 5){
+            $("#date_sat").html(date);
+            var content_sat='';
+            if (result["schedule_dict"][date].length != 0){
+              for (var j = 0; j< result["schedule_dict"][date].length; j++){
+                var obj_6 = {};
+                obj_6 = result["schedule_dict"][date][j];                
+                var content_sat='<ol class="schedule pop-in">';
+                content_sat+='<li><strong> Time:</strong>'+'</li><li>'+ obj_6["Time"] +'</li>';
+                content_sat+='<li><strong> Patient</strong>:'+'</li><li>'+ obj_6["First_name"] + '</li><li>'+ obj_6["Last_name"]+'</li>';
+                content_sat+='</ol>';
+              } }else{
+                content_sat+='';
+              }
+          }
+          else{
+            $("#date_sun").html(date);
+            var content_sun='';
+            if (result["schedule_dict"][date].length != 0){
+              for (var j = 0; j< result["schedule_dict"][date].length; j++){
+                var obj_7 = {};
+                obj_7 = result["schedule_dict"][date][j];                
+                content_sun+='<ol class="schedule pop-in">';
+                content_sun+='<li><strong> Time:</strong>'+'</li><li>'+ obj_7["Time"] +'</li>';
+                content_sun+='<li><strong> Patient</strong>:'+'</li><li>'+ obj_7["First_name"] + '</li><li>'+ obj_7["Last_name"]+'</li>';
+                content_sun+='</ol>';
+              }}
+              else{
+                content_sun+='';
+              }
+          }
+      }
+      $('#Sunday').html(content_sun);
+      $('#Monday').html(content_mon);
+      $('#Tuesday').html(content_tue);
+      $('#Wednesday').html(content_wed);
+      $('#Thursday').html(content_thu);
+      $('#Friday').html(content_fri);
+      $('#Saturday').html(content_sat);
+    }
+    $("#search_date").click(function(event){
+      event.preventDefault();
+      var input_date = $("#input_date").val();
+      get_schedule(input_date);
+    } );
+  </script>
+  <script>
+    var today =new Date();
+    var day = today.getDate();
+    var month = today.getMonth() + 1;
+    var year = today.getFullYear();
+    var datestring = year+"-"+month+"-"+day;
+    window.onload=function(){
+      get_schedule(datestring);
+    }
+  </script>
+{% endblock %}

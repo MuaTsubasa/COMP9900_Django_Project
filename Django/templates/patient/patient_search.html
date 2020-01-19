@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Clinic Information
+{% endblock %}
+{% block specific_css %}
+{% endblock %}
+{% block main %}
+	<div class="bg_color_2">
+        <div class="container-fluid" style="padding: 30px;">
+            <!-- Breadcrumbs-->
+            <div class="box_general">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h3 style="font-weight: 1000;"><i class="icon-list-1"></i>Search Radiology Clinic</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="AppTable" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Address</th>
+                                        <th>ZipCode</th>
+                                        <th>MRI</th>
+                                        <th>CT</th>
+                                        <th>X-Ray</th>
+                                        <th>Children's Image</th>
+                                        <th>Women's Procedure</th>
+                                        <th>Cardiology</th>
+                                        <th>Dentistry</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Address</th>
+                                        <th>ZipCode</th>
+                                        <th>MRI</th>
+                                        <th>CT</th>
+                                        <th>X-Ray</th>
+                                        <th>Children's Image</th>
+                                        <th>Women's Procedure</th>
+                                        <th>Cardiology</th>
+                                        <th>Dentistry</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    {% for i in result %}
+                                        <tr>
+                                            <td>{{ i.ClinicName}}</td>
+                                            <td>{{i.Email}}</td>
+                                            <td> {{ i.Address }} </td>
+                                            <td> {{ i.ZipCode }} </td>
+                                            <td> 
+                                                {% if i.MRI == '1' %}
+                                                    <p style="color:#5DAC81; font-size: 20px;"><i class="icon-ok-outline"></i></p>
+                                                    <input hidden value ="1" />
+                                                {% else %}
+                                                    <input hidden value ="0" />
+                                                {% endif %} 
+                                            </td>
+                                            <td> 
+                                                {% if i.CT == '1' %}
+                                                    <p style="color:#5DAC81; font-size: 20px;"><i class="icon-ok-outline"></i></p>
+                                                    <input hidden value ="1" />
+                                                {% else %}
+                                                    <input hidden value ="0" />
+                                                {% endif %} 
+                                            </td>
+                                            <td> 
+                                                {% if i.X_Ray == '1' %}
+                                                    <p style="color:#5DAC81; font-size: 20px;"><i class="icon-ok-outline"></i></p>
+                                                    <input hidden value ="1" />
+                                                {% else %}
+                                                    <input hidden value ="0" />
+                                                {% endif %} 
+                                            </td>
+                                            <td> 
+                                                {% if i.ChildrenImage == '1' %}
+                                                    <p style="color:#5DAC81; font-size: 20px;"><i class="icon-ok-outline"></i></p>
+                                                    <input hidden value ="1" />
+                                                {% else %}
+                                                    <input hidden value ="0" />
+                                                {% endif %} 
+                                            </td>
+                                            <td> 
+                                                {% if i.WomenProcedure == '1' %}
+                                                    <p style="color:#5DAC81; font-size: 20px;"><i class="icon-ok-outline"></i></p>
+                                                    <input hidden value ="1" />
+                                                {% else %}
+                                                    <input hidden value ="0" />
+                                                {% endif %} 
+                                            </td>
+                                            <td> 
+                                                {% if i.Cardiology == '1' %}
+                                                    <p style="color:#5DAC81; font-size: 20px;"><i class="icon-ok-outline"></i></p>
+                                                    <input hidden value ="1" />
+                                                {% else %}
+                                                    <input hidden value ="0" />
+                                                {% endif %} 
+                                            </td>
+                                            <td> 
+                                                {% if i.Dentistry == '1' %}
+                                                    <p style="color:#5DAC81; font-size: 20px;"><i class="icon-ok-outline"></i></p>
+                                                    <input hidden value ="1" />
+                                                {% else %}
+                                                    <input hidden value ="0" />
+                                                {% endif %} 
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block specific_js %}
+	<script src="/static/vendor/chart.js/Chart.min.js"></script>
+    <script src="/static/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/static/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="/static/vendor/retina-replace.min.js"></script>
+    <script src="/static/js/jquery.magnific-popup.min.js"></script>
+    <script src="/static/js/admin-datatables.js"></script>
+    <script src="{% static 'js/jquery.selectBox-1.2.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#AppTable').dataTable( {
+                "paging":   true,
+                "ordering": true,
+                "info":     true,
+                "search": true,
+                "language":{
+                    "search" : "Filter by keywords:"
+                }
+            } );
+        } );
+    </script>    	
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+Project Discription
+{% endblock %}
+{% block specific_css %}
+    <script src="{% static 'js/modernizr.js' %}"></script>
+{% endblock %}
+{% block main %}
+<style type="text/css">
+    /* ------------------------------------------------------------------- 
+     * ## home scroll
+     * ------------------------------------------------------------------- */
+    [data-aos=fade-up] {
+      transform: translateY(100px);
+    }
+    [data-aos=fade-up-right] {
+      transform: translate(-100px, 100px);
+    }
+
+    [data-aos=fade-up-left] {
+      transform: translate(100px, 100px);
+    }
+    .box_title h2{
+        font-size: 36px;
+        color:#3f4079;
+        text-align: center;
+        padding-bottom: 40px;
+        text-transform: uppercase;
+    }
+    .group{
+        margin:auto;
+    }
+    .group p{
+        font-size: 20px;
+        font-weight: 1000;
+    }
+    .group strong{
+        margin-left: 10px;
+        font-size: 20px;
+        font-weight: 1000;
+    }
+    .purpose li{
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+    .purpose strong{
+        color:#e84a5f;
+        font-weight: 1000;
+    } 
+    .purpose li p{
+        font-size: 16px;
+        font-weight: 400;
+        margin-left: 2.5em;
+    }
+    .img_container{
+        margin-right: 30px;
+        margin-left: 30px;
+    } 
+    .img_container img{
+        display: block;
+        width: 100%;
+        margin: auto;
+    }
+    .zoom {
+      padding: 50px;
+      transition: transform .2s; /* Animation */
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+    }
+
+    a:hover {
+      transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+</style>
+
+    <!-- home
+    ================================================== -->
+    <div class="bg_color_2" height="100" style="padding:0 0 20px 0;">
+        <div class="hero_home version_3" style="height: 1080px; width: 1920px;background:#3f4079 url({% static 'img/background.png' %}) no-repeat center;">
+            <div class="content" style="padding:0px 480px 0px 480px; display: block; margin-top:200px;">
+                <h3>Radiology Examination Assistant</h3>
+                <div class="fadeInUp">
+                    <div class="row group" style="padding:10% 33% 10% 33%;">
+                        <p style="font-size: 22px;">&nbsp Team :<strong>&nbsp Wind of Change &nbsp</strong></p>
+                    </div>
+                    <div class="row group" style="padding:0 15% 0% 15%;">
+                        <div class="col-sm-3"><p> Chenyi Cao </p></div>
+                        <div class="col-sm-3"><p> Zanlai Hu </p></div>
+                        <div class="col-sm-3"><p> Haoling Wu </p></div>
+                        <div class="col-sm-3"><p> Han Yue </p></div>
+                    </div>
+                </div>
+                <a href="#about" style="float: right;font-size: 10px; opacity: 0.5; text-transform: uppercase; transform:rotate(90deg);">Purpose</a>
+            </div>
+        </div>
+
+        <div class="container" data-aos="fade-up" id = "about" style="height: 1500px;">
+            <div class="box_general" data-aos="fade-up" style="width: 60%;margin: auto;">
+                <div class="box_title">
+                    <h2><strong>Purpose Overview</strong></h2>
+                </div>
+                <ol class="purpose">
+                    <li> 1. &nbsp  Help patients <strong>RESERVE and PREPARE</strong> for radiology examinations</li>
+                    <li> 2. &nbsp Solve patients' questions related to radiology examinations by chatting with Assistant Bot</li>
+                    <li> 3. &nbsp  Help radology clinic (reseptionists) to <strong>MANAGE radiology appointments</strong></li>
+                    <li> 4. &nbsp Provide patients with <strong> MAP VIEW </strong>of radiology clinics of a selected examination</li>
+                </ol>
+            </div>
+            <a href="#top" style="color:#ffff; font-size: 10px; opacity: 0.5; float:left; text-transform: uppercase; transform:rotate(-90deg);">Top</a>
+            <a href="#arch" style="color:#ffff;font-size: 10px; opacity: 0.5; float:right; text-transform: uppercase; transform:rotate(90deg);">System Architecture</a>
+        </div>
+        <div id="arch" class="container" data-aos="fade-up" style="padding: 0; height: 1500px;">
+            <div class="img_container">
+                <div  class="box_title">
+                    <h2 style="color: #ffff;"><strong>System Architecture</strong></h2>
+                </div>
+                <img class = "center" src="{% static 'img/architecture.png' %}">
+            </div>
+            <a href="#about" style="color:#ffff; font-size: 10px; opacity: 0.5; float:left; text-transform: uppercase; transform:rotate(-90deg);">Purpose</a>
+            <a href="#assume" style="color:#ffff; font-size: 10px; opacity: 0.5; float:right; text-transform: uppercase; transform:rotate(90deg);">Assumptions</a>
+        </div>
+        <div id="assume" class="container" data-aos="fade-up" style="height: 1500px;">
+            <div class="box_general" data-aos="fade-up" style="margin: 0 20% 0 20%;">
+                <div  class="box_title">
+                    <h2><strong>Assumptions</strong></h2>
+                </div>
+                <ol class="purpose">
+                    <li> 1.&nbsp Patients <strong>already knew</strong> which examination to take
+                        <p> - &nbsp Patients already consaulted with GPs;</p>
+                        <p> - &nbsp The GP will offer a reference letter for following examinations;</p>
+                    </li>
+                    <li> 2.&nbsp Apart from 'online-questionaire', patients needs to fill out other files if clinic adds <strong>requirements</strong>
+                        <p> - &nbsp The online-questionaires only gives patients an overview of what situation should be avoid for particular examinations.</p>
+                    </li>
+                    <li> 3.&nbsp Patients should <strong>inform clinic</strong> if they need to cancel an approved examination;
+                        <p> - &nbsp Assume this term is in the cancellation policy;</p>
+                    </li>
+                </ol> <!-- end testimonials__slide -->
+            </div>
+            <a href="#arch" style="color:#ffff;font-size: 10px; opacity: 0.5; float:left; text-transform: uppercase; transform:rotate(-90deg);">System Architecture</a>
+            <a href="#features" style="color:#ffff;font-size: 10px; opacity: 0.5; float:right; text-transform: uppercase; transform:rotate(90deg);">Featured Functions</a>
+        </div> <!-- end testimonials -->
+
+
+        <div id="features" class="container" data-aos="fade-up" style="padding: 0; height: 1500px;">
+            <div class="img_container" style="background-color: rgba(242,242,242);">
+                <div  class="box_title">
+                    <h2 style="color: #e84a5f;"><strong>Featured Functions</strong></h2>
+                </div>
+                <img src="{% static 'img/Features.png' %}">
+            </div>
+            <div id="toTop"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block specific_js %}
+
+{% endblock %}

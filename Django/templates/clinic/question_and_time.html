@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Questionaire and Timetable{% endblock %}
+{% block specific_css %}
+	<!-- Plugin styles -->
+	<link href="{% static 'vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+	<link href="{% static 'css/prettify-1.0.css' %}" rel="stylesheet">
+	<link href="{% static 'css/base.css" rel="stylesheet' %}">
+	<link href="{% static 'css/bootstrap-datetimepicker.css' %}" rel="stylesheet">
+	<!-- Main styles -->
+	<link href="{% static 'css/admin.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+	<div class="bg_color_3">
+		<div class="col-8" style="margin: auto;padding: 60px;">
+			<div class="tabs_styled_2">
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="Ques-tab" data-toggle="tab" href="#Ques" role = "tab" aria-controls = "Ques">Questionnaire</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="Time-tab" data-toggle="tab" href="#Times" role = "tab" aria-controls = "Times">Timetable</a>
+					</li>
+				</ul>
+				
+				<form method = "post">
+						{% csrf_token %}
+					<div class="tab-content">
+						<div class="tab-pane fade show active" id="Ques" role="tabpanel" aria-labelledby="Ques-tab">
+							<div class="header_box version_2">
+								<h2 style="font-weight: 1000;"><i class="fa fa-folder"></i>Questionaire</h2>
+							</div>
+							<div class="col-md-10" style="margin:auto;">
+								<div class="form-group">
+									<h6 style="font-weight: 800;">Questionaire Build</h6>
+									<p> Please enter multiple choice questions (with Yes/No/Not sure options) for patients to answer while making appointment requests</p>
+										<ol type="1" id = "questionaires">
+										{% for question in Questiones %}
+											<li>
+												<div class="row" style="padding-bottom: 10px; margin: auto;">
+													<div class="col-12">
+														<input type="text" class="form-control" name="question_list[]" value="{{ question }}" />
+													</div>
+												</div>
+											</li>
+										{% endfor %}
+										{% for i in Question_count %}
+											<li>
+												<div class="row" style="padding-bottom: 10px;margin: auto;">
+													<div class="col-12">
+														<input type="text" class="form-control" name="question_list[]" placeholder="enter question" />
+													</div>
+												</div>
+											</li>
+										{% endfor %}
+									</ol>
+								</div>
+							</div>
+								<!-- /row-->
+						</div>
+						<!-- /box_general-->
+						<div class="tab-pane fade" role="tabpanel" id="Times" aria-labelledby="Time-tab">
+							<div class="header_box version_2">
+								<h2 style="font-weight: 1000;"><i class="fa fa-folder"></i>Time Table</h2>
+							</div>
+							<div class="col-md-8" style="margin:auto;">
+								<div class="form-group" style="align-items: center;">
+									<h6 style="font-weight: 800;">TimeTable Build</h6>
+									<p> Please enter your timetable for radiologt examinations</p>
+									<ol type="1" id="timetables">
+										{% for time, slot in TimeTable %}
+											<li>
+												<div class="row" style="padding-bottom: 10px;">
+													<div class="col-sm-6">
+											            <div class='input-group date' name='datetimepicker3'>
+											                <input type='text' class="form-control" name = "timelist[]" value="{{time}}" />
+											                <span class="input-group-addon"><i class="icon-clock"></i>
+											                    <span class="glyphicon glyphicon-time"></span>
+											                </span>
+											            </div>
+											        </div>
+													<div class="col-sm-3">
+														<input type="text" class="form-control" name = "slotlist[]" value="{{slot}}" />
+													</div>
+												</div>
+											</li>
+										{% endfor %}
+										{% for i in Time_count %}
+											<li>
+												<div class="row" style="padding-bottom: 10px;">
+											        <div class='col-sm-6'>
+											            <div class='input-group date' name='datetimepicker3'>
+											                <input type='text' class="form-control" name = "timelist[]" placeholder="enter time" />
+											                <span class="input-group-addon"><i class="icon-clock"></i>
+											                    <span class="glyphicon glyphicon-time"></span>
+											                </span>
+											            </div>
+											        </div>
+													<div class="col-sm-3">
+														<input type="text" class="form-control" name = "slotlist[]" placeholder="slot">
+													</div>
+												</div>
+											</li>
+										{% endfor %}										
+									</ol>
+								</div>
+							</div>
+								<!-- /row-->
+						</div>
+						<!-- /box_general-->
+						<div class="col-4" style="margin:auto; padding-top: 15px;">
+							<input type="submit" value="Save" class="btn_1 medium" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block specific_js %}
+	<!-- Bootstrap core JavaScript-->
+	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+	<!-- Core plugin JavaScript-->
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+	<!-- Page level plugin JavaScript-->
+	<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+	<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+	<script src="{% static 'vendor/jquery.selectBox-1.2.js' %}"></script>
+	<script src="{% static 'js/retina-replace.min.js' %}"></script>
+	<script src="{% static 'vendor/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<!-- Boostrap-Datetimepicker-->
+	<script src="{% static 'js/moment.js' %}"></script>
+	<script src="{% static 'js/bootstrap-datetimepicker.js' %}"></script>      
+	<!-- Custom scripts for all pages-->
+	<script src="{% static 'js/admin.js' %}"></script>
+	<script type="text/javascript">
+	    $(function () {
+	        $('[name = "datetimepicker3"]').datetimepicker({
+	            format: 'LT'
+	        });
+	    });
+	</script>
+{% endblock %}

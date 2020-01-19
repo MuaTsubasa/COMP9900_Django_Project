@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "e9900clinic-qtuqsm",
+  "private_key_id": "c5066837026178d96c810475c55891e172d4120a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCkpKQbGmcpe5fs\ney25Zbe966OsGoikn6SwlOhQfiV1swgact9RmYTDdu9aEv9tXJY/87wFU57wv4Tx\n4a9DxsISiJRD5WTnF3AouPjUXROz5VdBWtvw7TMgTtUCo3u0LHP0eKkeT7BCvS6o\n7vK8LMXtcf76UHtpZxj7kJwZyWlhGGa0UAWUv7SzZ47gtuVdxeAJ5r+lIrxgJFNl\nF6LMOy2yMBBaSAukedcAOYToaYWStpgDYpMrnK+Nf8ksolEZ5t0l5OQT/RkQZpa9\ngVCSoOb/BUFBJNGC5I5fxGrCAIauxwitdwQGhzZjgzTO0OjuOyjE0TUbmobwJzxb\n2GzI1MwxAgMBAAECggEABZUHc1vLz54/Imdyv2xxdGD+5aDorRw0i0AhOElun7T4\nO11VsQCRfccUimtGecC/3182KsARDXyQ11qdhKDCh7pVvI+UgjlLNjY/SYP2XQ0T\njkW0W1DPgPLrSfGdChjPvaQxp7Nv+HNNl7CyTir+cvSAfqAn7wTt1emrQTyQ9Be/\nx77hsPw4dlKzgutAAJ1Y8Ba69xxkHrqOfMB0t3h5uPrE6rYgFvOfTyXLKqbA3VQJ\nfhm7EibyvczrS8ZOUSUVnuBveusvbBkw4T5yXPr49yD3bsN2AlSbJa73QK+2AQ6/\n6S/G9uzGAkGfc+kOEyKi7XTzmJ7UOwfKNVu9Lg3AeQKBgQDOUpI8aE+h11HFEnUn\nosLfBseuUQvN8M/9sa7n8+/9mU7S0tCHJjy0afZsy5LqMljl7G3+OuaQWkGqCITI\n8eqg+z6motnqONvOsF2NUFCeG5ujZylq2A1bYpe/AK2jxZYW02xRGKJXFN/wCcDO\naQtE+p3ktZpiy/V4evLIR1VvJwKBgQDMSQKESt0gn1mNP4mG58npHPeLPZUPt5q0\nQQK2tKvT/aIdymZfu1WHp2qw1PSeIdFGAWKWzBJrJ0y+DZRraqWB/T/kHLnXIiDn\nkbXlbXqwVivMbZSLGSRzeVwHu+m74YAZQuuTDM0H+TF5ISxyhRrqACIkNN8Xtvi1\nOsShTcaA5wKBgBn3WmAv4JXFu4zJ3eS3Hz9iYw8VNB8fB44uJo0arkGEYd82mPfp\nYAp0q4bVuA+xdm65ar5sO0g/k7QKjmubxqOr+x6NsE9CCKfimmOGkB7V6qiN+zBv\nMH8n0WFAfJn37APDaAZsy0GaZvSWxaU0oy5zPBvknyF/+czH7HY4RBBRAoGABOc3\ntT8qwY6xko9U2LUVho/YbTIkMsVgZDUvQH1jpmnvCzIBdQjFC8V77RSfbnA3WqvL\n1vy88G94CxO+XTmpEU6nyuzZlQ1Ppt87c29GQ5c94+E5cIFA+7iM+e6LtKO79F9D\n0jq7bRaRFmwyaelB9R3ds+rE9AfDPm5Tq993BT8CgYBxPijk8MI3HitlbPzLMgYf\n5u7zJ3aWAu5vIlRoGZ/++Qeq4g6zSzpWED4t1AIXWoBSON6SZNXl/nuE14II4leD\n6B/8JKH9VQVjBaLVDHfbeql9lNDiHRlb3fgHhmzU29IFc6oFyarmRma5Pte91/11\nQhDklKQmvH/OnnduroAWOw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "dialogflowchatbot@e9900clinic-qtuqsm.iam.gserviceaccount.com",
+  "client_id": "108029043170457394247",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dialogflowchatbot%40e9900clinic-qtuqsm.iam.gserviceaccount.com"
+}

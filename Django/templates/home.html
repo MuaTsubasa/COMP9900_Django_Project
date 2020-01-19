@@ -1,0 +1,144 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    Home
+{% endblock %}
+{% block specific_css %}
+	<!-- Modernizr -->
+	<script src="{% static 'js/modernizr.js' %}"></script>
+{% endblock %}
+{% block main %}
+	<style type="text/css">
+    .img_container{
+        margin-right: 30px;
+        margin-left: 30px;
+        border:5px solid #ffff;
+        border-radius: 20px;
+    } 
+    .img_container img{
+        display: block;
+        width: 100%;
+        margin: auto;
+    }		
+	</style>
+	<div class="hero_home version_3" style="padding-top: 50px;">
+		<div class="content">
+			<div class="content">
+				<h3 style="margin-bottom: 20px;">Radiology Examination Assistant</h3>
+				{% if request.session.clinic_user %}
+					<a href="{% url 'dashboard' %}" class="btn_1 medium fadeIn animated" style="background:#3A8FB7;">&nbsp Manage Requests &nbsp</a>
+				{% elif request.session.user %}
+					<a href="{% url 'appointment' %}" class="btn_1 medium fadeIn animated">&nbsp Start Booking &nbsp</a>
+				{% else %}
+					<a href="{% url 'signin' %}" class="btn_1 medium fadeIn animated" style="background-color:#C73E3A">&nbsp Registrate Now &nbsp </a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<!-- /container -->
+	<div class="bg_color_3">
+		<div class="container margin_120_90 borderimg1" style="padding-top:45px; border-top: 5px dotted #ffff;">
+			<div class="main_title">
+			    <h3 style="color:#fff02a; font-size:36px;"><strong>Skill Utilized</strong></h3>
+			</div>
+			<div class="box_general_3" style="width: 65%; margin: auto;">
+				<div class="reviews-container">
+					<h4> Front-end </h4>
+					<div class="row">
+						<div class="col-lg-8 col-9">
+							<div class="progress">
+								<div class="progress-bar" role="progressbar" style="width: 80%" aria-valuemin="0"
+								aria-valuemax = "100"><span>90%</span></div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-3">
+							<h6 data-toggle="tooltip" title="template build"> HTML5, CSS </h6>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-8 col-9">
+							<div class="progress">
+								<div class="progress-bar" role="progressbar" style="width: 70%" aria-valuemin="0"
+								aria-valuemax = "100"><span>70%</span></div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-3">
+							<h6 data-toggle="tooltip" title="web animation and data transmission">JavaScript + Jquery</h6>
+						</div>
+					</div>
+					<h4> Back-end </h4>
+					<div class="row">
+						<div class="col-lg-8 col-9">
+							<div class="progress">
+								<div class="progress-bar" role="progressbar" style="width: 60%" aria-valuemin="0"
+								aria-valuemax = "100"><span>60%</span></div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-3">
+							<h6 data-toggle="tooltip" title="on-page dynamic data loading"> Ajax </h6>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-8 col-9">
+							<div class="progress">
+								<div class="progress-bar" role="progressbar" style="width: 95%" aria-valuemin="0"
+								aria-valuemax = "100"><span>95%</span></div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-3">
+							<h6 data-toggle="tooltip" title="Framework and Data Pre-pocessing"> Django </h6>
+						</div>
+					</div>
+					<h4> Server </h4>
+					<div class="row">
+						<div class="col-lg-8 col-9">
+							<div class="progress">
+								<div class="progress-bar" role="progressbar" style="width: 90%" aria-valuemin="0"
+								aria-valuemax = "100"><span>90%</span></div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-3">
+							<h6 data-toggle="tooltip" title="Database query"> SQL </h6>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bg_color_2">
+		<div class="container margin_120_90 borderimg1" style="padding-top:45px; border-top: 5px dotted #ffff;">
+		    <div class="main_title">
+		        <h3 style="color:#fff02a; font-size:36px;"><strong>Featured Functions</strong></h3>
+		    </div>
+            <div class="img_container" style="background-color: #ffff">
+                <img src="{% static 'img/Features.png' %}" class="img-fluid">
+            </div>
+		</div>
+	</div>
+	<div id="app_section">
+		<div class="container borderimg1">
+			<div class="main_title">
+			    <h3 style="font-size:36px;"><strong>About Us</strong></h3>
+			</div>
+			<div class="row justify-content-around">
+				<div class="col-sm-4">
+					<img src="{% static 'img/unsw_logo.png' %}" class="img-fluid" style="vertical-align: middle;">
+				</div>
+				<div class="col-md-7">
+					<p class="lead">&nbsp Full-stack <strong>Django</strong> based website project for radiology examination preparation and management.</p>
+						<p>&nbsp - Patient Examination <strong>reservation and preparation</strong> tips </p>
+						<p>&nbsp - Clinic <strong>appointment management</strong>. </p>
+						<p>&nbsp - <strong>Flask Based</strong> On-line Assistant <strong>chatbot</strong> </p>
+						<div style="float:right; padding: 5px;">
+							<p>&nbsp Team: Wind of Change &nbsp</p>
+							<p>&nbsp COMP 2019 Term 3 &nbsp</p>
+							<p>&nbsp University of New South Wales &nbsp</p>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+{% endblock %}
+{% block specific_js %}
+{% endblock %}

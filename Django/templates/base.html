@@ -1,0 +1,226 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Favicons-->
+    <!-- BASE CSS -->
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/menu.css' %}" rel="stylesheet">
+    <link href="{% static 'css/vendors.css' %}" rel="stylesheet">
+    <link href="{% static 'css/icon_fonts/css/all_icons_min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/loading_2.css' %}">
+	<!-- CUSTOM CSS -->
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet">
+	<!--Pretty Checkbox-->
+	<link href="{% static 'css/pretty-checkbox.min.css' %}" rel="stylesheet">
+	<link href="{% static 'src/pretty-checkbox.scss' %}">
+    {% block specific_css %}{% endblock %}
+</head>
+<style type="text/css">
+	#menu {
+	  text-align: center; /* Centered text */
+	  position: fixed; /* Fixed position - sit on top of the page */
+	  top: 0;
+	  width: 100%; /* Full width */
+	  transition: 0.2s; /* Add a transition effect (when scrolling - and font size is decreased) */
+	}
+	#menu ul ul li a{
+		color:#e74e84;
+		font-weight: 600;
+		font-size: 18px;
+	}
+	.borderimg1 { 
+  		border-top: 20px solid transparent;
+  		padding: 15px;
+  		border-image-source: url("{% static 'img/borderimg3.png' %}");
+  		border-image-width: 20px;
+  		border-image-repeat: round;
+  		border-image-slice: 20%;
+	}
+</style>
+<body>
+	<div id="preloader" class="Fixed">
+		<div data-loader class ="dot-loading">
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+		</div>
+	</div>
+	<div id="page">
+		<header class="header_sticky" id = "top">
+			<nav id="menu" class="main-menu">
+				<div class="row" style="background-color: #242525;">
+					<div class="col-4" style="float: left;">
+						<div id="logo_home">
+							<h1><a href="{% url 'home' %}">
+								<img src="{% static 'img/logo_white.png' %}" data-retina="true" alt="" width="180" height="50" class="img-fluid">
+							</a></h1>
+						</div>
+					</div>
+					<div class="col-8" style="float: right;">
+						<ul style="font-size: 24px;">
+							<li><i class =" icon-home-2"></i>
+								<ul>
+									<li><a href="{% url 'home' %}"><i class="icon-home-3"></i>Home</a></li>
+								</ul>
+							</li>
+							<!-- <li><a href="{% url 'chatbox' %}" data-toggle="tooltip" title="Assistant Bot" style="color:#ebebeb;"><i class = "icon-chat-5"></i></a></li> -->
+							{%if request.session.clinic_user %}
+								<li><i class =" icon-user-md"></i>
+									<ul><li><a href="{% url 'dashboard' %}" style="font-size: 20px; margin-left: 40px;"><i class="icon-gauge-2"></i>Hi, {{ request.session.clinic_user.name }}</a></li>
+										<li><a href="{% url 'requestlist' %}"><i class="icon-clipboard"></i>Request List</a></li>
+										<li><a href="{% url 'upload_report' %}"><i class="icon-upload-1"></i>Upload Reports</a></li>
+										<li><a href="{% url 'statistics' %}"><i class = "icon-chart-bar-2"></i>Statistics</a></li>
+										<li><a href="{% url 'clinic_profile' %}"><i class="icon-edit-3"></i>Change Profile</a></li>
+										<li><a href="{% url 'time_and_question' %}"><i class="icon-doc-text"></i>Timetable & Questionnaire</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="{% url 'clinic_search' %}" data-toggle="tooltip" title="Patient infomation" style="color:#ebebeb;"><i class="icon-search"></i></a>
+								</li>
+							{% elif request.session.user %}
+								<li>
+									<a href="{% url 'appointment' %}" data-toggle="tooltip" title="Request an Examination" style="color:#ebebeb;"><i class="icon-calendar"></i></a>
+								</li>
+								<li><a href="{% url 'patient_search' %}" data-toggle="tooltip" title="Clinic Search" style="color:#ebebeb;"><i class="icon-search"></i></a></li>
+								<li><i class = "icon-guest"></i>
+									<ul><li><p style="font-size: 20px; margin-left: 40px;"> Hi, {{ request.session.user.name }}</p></li>
+										<li><a href = "/bookings/"><i class="icon-list-alt"></i>My Bookings</a></li>
+										<li><a href = "{% url 'patient_profile' %}"><i class="icon-edit-3"></i>Change Profile</a></li>
+									</ul>
+								</li>
+							{% else %}
+								<li><i class = "icon-login"></i>
+									<ul><li><a href = "{% url 'signin' %}"><i class = "icon-power"></i>Log in / Sign Up</a></li></ul>
+								</li>
+							{% endif %}
+							<li><i class = "icon-logout"></i>
+								<ul><li><a href = "{% url 'logout' %}"><i class = "icon-off"></i>Log out</a></li></ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<main style="margin:0;">
+			{% block main %}{% endblock %}
+		</main>
+		<footer id="foos">
+			<div class="container margin_30_15">
+				<div class="row">
+					<div class="col-3" style="padding-top:5px;">
+						<p>
+							<img src="{% static 'img/logo_white.png' %}" data-retina="true" alt="" width="180" height="50" class="img-fluid">
+						</p>
+					</div>
+					<div class="col-3" style="padding-top:5px;">
+						<h5><i class="icon-group"></i>About</h5>
+						<div class="col">On-line Radiology Examination Bookings</div>
+						<div class="col"><i class="icon-smiley"></i></div>
+						<div class="col">Assistant Chat bot for common questions</div>
+					</div>
+					<div class="col-3" style="padding-top:5px;">
+						<h5><i class="icon-group"></i> Team </h5>
+						<div class="col">Wind of Change</div>
+					<h5>Follow us</h5>
+						<div class="col">
+							<i class="icon-github-5" style="padding:5px;"></i>
+							<i class="icon-weibo"style="padding:5px;"></i>
+							<i class="icon-drupal"style="padding:5px;"></i>
+						</div>
+					</div>
+					<div class="col-3" style="padding-top:5px;">
+						<h5> COMP 9900 </h5>
+						<div class="col">UNSW </div>
+						<div class="col">2019 Term 3</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-8">
+						<ul id="additional_links">
+							<li><a href="#0"> Privacy Terms and Conditions</a></li>
+						</ul>
+					</div>
+					<div class="col-4">
+						<div id="copy">© 2019</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
+	<script src="{% static 'js/common_scripts.min.js' %}"></script>
+	<script src="{% static 'js/functions.js' %}"></script>
+	<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+	<script>
+		const indexOf = (word, character) => {
+		  for (let i = 0; i < word.length; i++) {
+		    if (word[i] === character) {
+		      return i;
+		    }
+		  }
+
+		  return -1;
+		}
+	</script>
+	<script>
+	    $('#calendar').datepicker({
+	        todayHighlight: true,
+	        weekStart: 1,
+	        format: "yyyy-mm-dd",
+	    });
+	</script>
+	{% block specific_js %}
+	{% endblock %}
+	<script>
+	    document.onreadystatechange=function(){
+	      if(document.readyState=='complete'){
+	         $('#sk-three-bounce').delay(100).fadeOut();
+	      }
+	    }
+	</script>
+	<script>
+	//paste this code under the head tag or in a separate js file.
+		// Wait for window load
+		$(window).load(function() {
+			// Animate loader off screen
+			$(".dot-loading").fadeOut("slow");;
+		});
+	</script>
+	<script>
+	    $(document).ready(function(){
+	      // Add smooth scrolling to all links
+	      $("a").on('click', function(event) {
+
+	        // Make sure this.hash has a value before overriding default behavior
+	        if (this.hash !== "") {
+	          // Prevent default anchor click behavior
+	          event.preventDefault();
+
+	          // Store hash
+	          var hash = this.hash;
+
+	          // Using jQuery's animate() method to add smooth page scroll
+	          // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+	          $('html, body').animate({
+	            scrollTop: $(hash).offset().top
+	          }, 600, function(){
+
+	            // Add hash (#) to URL when done scrolling (default click behavior)
+	            window.location.hash = hash;
+	          });
+	        } // End if
+	      });
+	    });
+    </script>
+</body>
+</html>
