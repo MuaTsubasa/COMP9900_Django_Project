@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#yl500*=@v@xgk^y!8ff=#muzs75chj=w(-5)u-elkg#nvex-n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1','47.56.141.234']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -83,7 +83,7 @@ DATABASES = {
         'USER':'admin',
         'PASSWORD':'Admin123',
         'PORT':'3306',
-        'HOST':'47.56.141.234',
+        'HOST':'localhost',
         'OPTIONS': {'charset': 'utf8mb4'}
     },
 }
